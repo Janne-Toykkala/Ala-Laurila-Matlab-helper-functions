@@ -22,5 +22,6 @@ On line 29, set the path to the directory where export_fig is located
 (for example, something like “\\home.org.aalto.fi\toykkaj1\data\Documents\MATLAB\export_fig”).
 
 Run setPaths.m. The Command Window should display: 
+
  *>>> setPaths
- >>> *
+ >>>
