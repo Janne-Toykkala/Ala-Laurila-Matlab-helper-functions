@@ -2,13 +2,15 @@
 Ala-Laurila lab's Matlab helper functions and how to use them. Helper functions written by Johan Westö, documentation by Janne Töykkälä
 
 ## First things first
-Download Git and Ghostscript through the Aalto software centre. You need these to make this work.
+Download Git and Ghostscript through the Aalto software centre. You need these to make the helper fuctions work.
+
+Then, download all the helper functions and save them to the same local directory (i.e. a folder on your computer, for example to something like \\home.org.aalto.fi\user\data\Documents\MATLAB)
 
 ## How to get *export_fig*
 The purpose of this publicly available Matlab code is to make Matlab save figures you have created in a consistent and correct format. Sadly, Matlab does not do this itself properly.
 
 Make a Git clone of the publicly available **export_fig** repository on GitHub.
-Save the clone to a local directory (i.e. a folder on your computer, for example to something like \\home.org.aalto.fi\user\data\Documents\MATLAB)
+Save the clone to a local directory, e.g. the same one that the .
  
 Download the helper function **setPaths.m** script from this current repository and open it on Matlab.
 **SetPaths** has two sections that include the comment *“MODIFY THIS!!!”*.
@@ -19,4 +21,6 @@ It should say something like “\\home.org.aalto.fi\user\data\Documents\MATLAB\s
 On line 29, set the path to the directory where export_fig is located
 (for example, something like “\\home.org.aalto.fi\toykkaj1\data\Documents\MATLAB\export_fig”).
 
-Run the script.
+Run setPaths.m. The Command Window should display: 
+ *>>> setPaths
+ >>> *
