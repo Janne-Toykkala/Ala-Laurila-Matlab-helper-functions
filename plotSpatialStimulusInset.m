@@ -1,17 +1,16 @@
 function ahStim = plotSpatialStimulusInset(x0, y0, bg, fg)
-% plotSpatialStimulusInset - Insert a spatial stimulus icon to the figure
-% at specified coordinates with specified colours
+% Insert a spatial stimulus icon to the figure at specified coordinates with specified colours
 %
-% Syntax:  rodsPerRGC = getRodsPerRGC(sigma, rodDensity, lim)
+% Syntax:  plotSpatialStimulusInset(x0, y0, bg, fg)
 %
 % Inputs:
-%    x0 - x-coordiante for the center
-%    y0 - y-coordiante for the center
+%    x0 - x-coordinate for the center
+%    y0 - y-coordinate for the center
 %    bg - background color
 %    fg - foreground color
 %
 % Outputs:
-%    rodsPerRGC - weighted rod convergence per ganglion cell
+%    plotSpatialStimulusInset - figure icon of the spatial stimulus
 %
 % Example: 
 %
