@@ -1,5 +1,6 @@
 function ahStim = plotSpatialStimulusInset(x0, y0, bg, fg)
-%rodsPerRGC - One line description of what the function or script performs (H1 line)
+% plotSpatialStimulusInset - Insert a spatial stimulus icon to the figure
+% at specified coordinates with specified colours
 %
 % Syntax:  rodsPerRGC = getRodsPerRGC(sigma, rodDensity, lim)
 %
