@@ -1,8 +1,24 @@
 function fixLegendIcons(icons, shift, horizontal)
 
+% Fix the legend of a figure to a specified position.
+% 
+% Syntax:  fixLegendIcons(icons, shift, horizontal)
+% 
+% Inputs:
+%    icons      - 
+%    shift      - 
+%    horizontal - true or false
+%
+% Outputs:
+%    fixLegendIcons - legend icons fixed to a position
+%
+% Example: -
+%
+% See also: - 
+
   lineCnt = 1;
-  markCnt = 1;
   textCnt = 1;
+  markCnt = 1;
 
   for icon = icons'
     
