@@ -1,5 +1,29 @@
 function [fh, ahs] = getFigureWindow(nRows, nCols, params, ms, visible)
+% Creates a new figure window
+%
+% Syntax:  getFigureWindow(nRows, nCols, params, ms, visible)
+%
+% Inputs:
+%    nRows   - number of horizontal axes in the figure
+%    nCols   - number of vertical axes in the figure
+%    params  - parameters in an array, use function getParameterValue
+%    ms      - true or false, default settings for manuscript
+%    visible - true or false
+%
+% Outputs:
+%    [fh, ahs]
+%
+% Example: 
+%       [fh, ax] = getFigureWindow(1, 1, [figWidth, figHeight, axX0, axY0, axWidth, axHeight, 0, 0], true, true);
+%       set(fh, 'CurrentAxes', ax)
+%
+% See also: -
 
+
+% If number of input arguments < 5, or includes "visible"
+%     set visible as "on".
+%   Otherwise
+%     set visible as "off".
   if nargin < 5 || visible
     visible = 'on';
   else

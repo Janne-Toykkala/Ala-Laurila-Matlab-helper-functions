@@ -11,7 +11,7 @@ function val = getParameterValue(param, returnSuggestions)
 %    val
 %
 % Example: 
-%    figWidth = getParameterValue('figWidth');
+%    >> getParameterValue('width', true);
 %
 % See also: -
 
@@ -46,12 +46,12 @@ function val = getParameterValue(param, returnSuggestions)
   params('colorFading') = 0.5;
 
 % Return the requested value, or print a warning message
-% If map 'params' contains the key written as an argument,
+% If map 'params' contains the key written in the argument,
 %   return the value corresponding to that key.
 % Otherwise,
-%   if number of arguments in more than 1 and ???
+%   if number of arguments in more than 1 and returnSuggestions is true
 %     return keys of map 'params'
-%     return value as key(/s) that contain ???
+%     return value as key(/s) that contain the string or the pattern
 %   Otherwise,
 %     value is not a number
 %     print "WARNING: no parameter 'param name' defined" and start a new line.

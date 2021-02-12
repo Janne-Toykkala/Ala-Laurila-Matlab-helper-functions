@@ -11,7 +11,7 @@ function val = getParameterValue(param, returnSuggestions)
 %    val
 %
 % Example: 
-%    figWidth = getParameterValue('figWidth');
+%    figWidth = getParameterValue('figWidth', true);
 %
 % See also: -
 
@@ -54,7 +54,7 @@ function val = getParameterValue(param, returnSuggestions)
 %     return value as key(/s) that contain ???
 %   Otherwise,
 %     value is not a number
-%     print "WARNING: no parameter 'name' defined" and start a new line.
+%     print "WARNING: no parameter 'param name' defined" and start a new line.
   if params.isKey(param)
     val = params(param);
   else
