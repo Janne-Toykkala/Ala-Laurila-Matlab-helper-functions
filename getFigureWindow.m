@@ -8,22 +8,31 @@ function [fh, ahs] = getFigureWindow(nRows, nCols, params, ms, visible)
 %    nCols   - number of vertical axes in the figure
 %    params  - parameters in an array, use function getParameterValue
 %    ms      - true or false, default settings for manuscript
-%    visible - true or false
+%    visible - 'on' or 'off'
 %
 % Outputs:
 %    [fh, ahs]
 %
 % Example: 
-%       [fh, ax] = getFigureWindow(1, 1, [figWidth, figHeight, axX0, axY0, axWidth, axHeight, 0, 0], true, true);
+%       [fh, ax] = getFigureWindow(1, 1, [figWidth, figHeight, axX0, axY0,...
+%           axWidth, axHeight, 0, 0], true, true);
 %       set(fh, 'CurrentAxes', ax)
 %
 % See also: -
 
 
+%   p = inputParser;
+%   argName = 'visible';
+%   defaultVal = 'on';
+%   validationFcn = @(s) isstring(s);
+%   addOptional(p,argName,defaultVal,validationFcn);
+%   parse(p);
+
 % If number of input arguments < 5, or includes "visible"
 %     set visible as "on".
 %   Otherwise
 %     set visible as "off".
+
   if nargin < 5 || visible
     visible = 'on';
   else
@@ -59,7 +68,9 @@ function [fh, ahs] = getFigureWindow(nRows, nCols, params, ms, visible)
   end
 
   % Create figure
-  fh = figure('Visible', 'on', 'units', 'centimeters', 'Position', [0, 0, figWidth, figHeight], 'PaperUnits', 'centimeters', 'PaperSize', [figWidth, figHeight], 'Visible', visible);
+  fh = figure('Visible', 'on', 'units', 'centimeters', 'Position',... 
+      [0, 0, figWidth, figHeight], 'PaperUnits', 'centimeters',... 
+      'PaperSize', [figWidth, figHeight], 'Visible', visible);
 
   % Create axes array with the following index notation
   %| 1 2 3 |
@@ -71,10 +82,11 @@ function [fh, ahs] = getFigureWindow(nRows, nCols, params, ms, visible)
   ahs = [];
   for i = nRows:-1:1
     for j= 1:nCols
-      ahs(end+1) = axes('Units', 'centimeters', 'Position', [x0 + (j-1)*(axWidth+xSpace), y0 + (i-1)*(axHeigt+ySpace), axWidth, axHeigt], 'Color', 'none');
+      ahs(end+1) = axes('Units', 'centimeters', 'Position',... 
+          [x0 + (j-1)*(axWidth+xSpace), y0 + (i-1)*(axHeigt+ySpace),...
+          axWidth, axHeigt], 'Color', 'none');
       hold on
     end
   end
   
 end
-

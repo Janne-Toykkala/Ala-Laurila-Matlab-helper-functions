@@ -1,6 +1,6 @@
 function fixLegendIcons(icons, shift, horizontal)
 
-% Fix the legend of a figure to a specified position.
+% *description of the function*
 % 
 % Syntax:  fixLegendIcons(icons, shift, horizontal)
 % 
@@ -16,25 +16,24 @@ function fixLegendIcons(icons, shift, horizontal)
 %
 % See also: - 
 
-  lineCnt = 1;
-  textCnt = 1;
-  markCnt = 1;
+  lineCnt = 1;  % line alignment in legend
+  textCnt = 1;  % text alignment in legend
+  markCnt = 1;  % marker alignment in legend
 
   for icon = icons'
-    
-    if strcmp(icon.Type, 'hggroup')
-      chs = get(icon, 'Children');
+    if strcmp(icon.Type, 'hggroup') 
+      chs = get(icon, 'Children'); % not necessary
       for ch = chs'
         if contains(ch.Type, 'group')
-          chs2 = get(get(icon, 'Children'), 'Children');
+          chs2 = get(get(icon, 'Children'), 'Children'); % not necessary
           for icon2 = chs2'
-            icon2.XData = icon2.XData + shift/2;
+            icon2.XData = icon2.XData + shift/2;   % not necessary
           end
         else
           if strcmp(ch.Type, 'patch')
             ch.XData([1, 2, 5]) = ch.XData([1, 2, 5]) + (lineCnt-1)*shift;
             ch.XData(3:4) = ch.XData(3:4) + lineCnt*shift;
-%             ch.MarkerSize = ch.MarkerSize*0.5;
+%           ch.MarkerSize = ch.MarkerSize*0.5;
           else
             ch.FaceAlpha = 0.4;
             ch.XData(3:4) = ch.XData(3:4) + lineCnt*shift;
@@ -45,6 +44,14 @@ function fixLegendIcons(icons, shift, horizontal)
         lineCnt = lineCnt + 1;
       end
     end
+   
+% MODIFY LEGEND ICON TEXT
+%   If the icons contain text:
+%     Set the text position as current text position plus shift...
+%            multiplied by text count.
+%     Get the text font size from your list of parameters.
+%     And if horizontal is true,
+%       add 1 to text count.
     
     if strcmp(icon.Type, 'text')
       icon.Position = icon.Position + [textCnt*shift, 0, 0];
@@ -54,6 +61,22 @@ function fixLegendIcons(icons, shift, horizontal)
       end
     end
 
+% MODIFY LEGEND ICON LINE
+%   If icons contain line and its style is solid,
+%     set the range of x-coordinates as the existing range plus shift.
+%     If horizontal is true,
+%       add 1 to line count.
+%
+%   Otherwise, if icons contain line and its style is dotted,
+%     set the range of x-coordinates as the existing range plus shift.
+%     If horizontal is true,
+%       add 1 to line count.
+%
+%   Otherwise, if icons contain line and its marker style is NOT "no marker",
+%     set the range of x-coordinates as the existing range plus shift.
+%     If horizontal is true,
+%       add 1 to line count.  
+    
     if strcmp(icon.Type, 'line') && strcmp(icon.LineStyle, '-')
       icon.XData = icon.XData + [(lineCnt-1)*shift, lineCnt*shift];
       if horizontal
@@ -71,6 +94,11 @@ function fixLegendIcons(icons, shift, horizontal)
       end
     end
     
+% MODIFY LEGEND BOX
+%   If icon contains a filled polygonal area:
+%     Move the range of x-coordinates that are from 1 to 2 by multiplicate of shift.
+%     Move the range of x-coordinates that are from 3 to 4 by multiplicate of shift.
+
     if strcmp(icon.Type, 'patch')
       icon.XData(1:2) = icon.XData(1:2) + (lineCnt-1)*shift;
       icon.XData(3:4) = icon.XData(3:4) + lineCnt*shift;

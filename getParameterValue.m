@@ -11,7 +11,7 @@ function val = getParameterValue(param, returnSuggestions)
 %    val
 %
 % Example: 
-%    >> getParameterValue('width', true);
+%    >> getParameterValue('width', true)
 %
 % See also: -
 
