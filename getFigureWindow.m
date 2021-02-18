@@ -8,14 +8,14 @@ function [fh, ahs] = getFigureWindow(nRows, nCols, params, ms, visible)
 %    nCols   - number of vertical axes in the figure
 %    params  - parameters in an array, use function getParameterValue
 %    ms      - true or false, default settings for manuscript
-%    visible - 'on' or 'off'
+%    visible - 'on' or 'off', optional argument
 %
 % Outputs:
 %    [fh, ahs]
 %
 % Example: 
 %       [fh, ax] = getFigureWindow(1, 1, [figWidth, figHeight, axX0, axY0,...
-%           axWidth, axHeight, 0, 0], true, true);
+%           axWidth, axHeight, 0, 0], true);
 %       set(fh, 'CurrentAxes', ax)
 %
 % See also: -
@@ -24,9 +24,15 @@ function [fh, ahs] = getFigureWindow(nRows, nCols, params, ms, visible)
 %   p = inputParser;
 %   argName = 'visible';
 %   defaultVal = 'on';
-%   validationFcn = @(s) isstring(s);
+%   defaultVal2 = false;
+%   validationFcn = @(s) isstring(s) || isnumeric(s) || islogical;
+%   addRequired(p,nRows,validationFcn)
+%   addRequired(p,nCols,validationFcn)
+%   addRequired(p,params,validationFcn)
+%   addOptional(p,ms,defaultVal2,validationFcn)
 %   addOptional(p,argName,defaultVal,validationFcn);
 %   parse(p);
+%   result=
 
 % If number of input arguments < 5, or includes "visible"
 %     set visible as "on".

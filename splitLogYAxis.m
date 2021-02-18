@@ -1,7 +1,7 @@
 function[axBottom, axTop] = splitLogYAxis(ax, xLim, yLim, xTicks, yTicks, hBottom, dy, bottomLabel)
 % Splits figure into two horizontal sections on the y-axis
 %
-% Syntax:  splitLogYAxis(aax, xLim, xTicks, yLim, yTicks, hBottom, dy)
+% Syntax:  splitLogYAxis(ax, xLim, xTicks, yLim, yTicks, hBottom, dy)
 %
 % Inputs:
 %    ax      - axis handle
@@ -26,8 +26,7 @@ function[axBottom, axTop] = splitLogYAxis(ax, xLim, yLim, xTicks, yTicks, hBotto
 % Top axis has the same units and position as the axis on the left.
   axBottom = ax;
   axTop = axes('Units', get(axBottom, 'Units'), 'Position',...
-      get(axBottom, 'Position'), 'Color', 'none');
-  hold on
+      get(axBottom, 'Position'), 'Color', 'none', 'NextPlot', 'add');
   
 % SET GRAPHICS PROPERTIES FOR THE BOTTOM AXIS
 % Set the position of the bottom axis, and set its height (via multiplying...

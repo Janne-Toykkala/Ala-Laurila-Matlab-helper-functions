@@ -5,8 +5,8 @@ function fixLegendIcons(icons, shift, horizontal)
 % Syntax:  fixLegendIcons(icons, shift, horizontal)
 % 
 % Inputs:
-%    icons      - 
-%    shift      - 
+%    icons      - an array of icon objects
+%    shift      - scalar value
 %    horizontal - true or false
 %
 % Outputs:
@@ -21,13 +21,14 @@ function fixLegendIcons(icons, shift, horizontal)
   markCnt = 1;  % marker alignment in legend
 
   for icon = icons'
+  
     if strcmp(icon.Type, 'hggroup') 
-      chs = get(icon, 'Children'); % not necessary
+      chs = get(icon, 'Children');
       for ch = chs'
         if contains(ch.Type, 'group')
-          chs2 = get(get(icon, 'Children'), 'Children'); % not necessary
+          chs2 = get(get(icon, 'Children'), 'Children');
           for icon2 = chs2'
-            icon2.XData = icon2.XData + shift/2;   % not necessary
+            icon2.XData = icon2.XData + shift/2;
           end
         else
           if strcmp(ch.Type, 'patch')
@@ -46,7 +47,7 @@ function fixLegendIcons(icons, shift, horizontal)
     end
    
 % MODIFY LEGEND ICON TEXT
-%   If the icons contain text:
+%   If the icons contains text:
 %     Set the text position as current text position plus shift...
 %            multiplied by text count.
 %     Get the text font size from your list of parameters.
@@ -62,7 +63,7 @@ function fixLegendIcons(icons, shift, horizontal)
     end
 
 % MODIFY LEGEND ICON LINE
-%   If icons contain line and its style is solid,
+%   If icons contain line, and its style is solid,
 %     set the range of x-coordinates as the existing range plus shift.
 %     If horizontal is true,
 %       add 1 to line count.
