@@ -7,7 +7,7 @@ function [fh, axs] = getFigureWindow(varargin)
 %    nRows   - number of horizontal axes in the figure
 %    nCols   - number of vertical axes in the figure
 %    params  - parameters in an array, use function getParameterValue
-%    ms      - true or false, optional argument, settings for manuscript
+%    ms      - true or false, settings for manuscript
 %    visible - 'on' or 'off', optional argument
 %
 % Outputs:
@@ -44,7 +44,7 @@ function [fh, axs] = getFigureWindow(varargin)
   xSpace    = a.params(7);
   ySpace    = a.params(8);
 
-% Default settings for a manuscript
+% Default settings 
   if a.ms
     set(0, 'DefaultAxesFontSize', getParameterValue('figTextFontSize'))
     set(0, 'DefaultTextFontSize', getParameterValue('figTextFontSize'))
