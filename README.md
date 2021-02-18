@@ -22,6 +22,6 @@ Save the clone to a local directory.
 (you can find and copy the path from File Explorer, for example by clicking on the folder icon on the top navigation bar when you are at the directory).
 
 4. On line 29, set the path to the directory where export_fig is located
-(for example, something like “\\home.org.aalto.fi\toykkaj1\data\Documents\MATLAB\export_fig”).
+(for example, something like “\\home.org.aalto.fi\user\data\Documents\MATLAB\export_fig”).
 
 5. Run setPaths.m without errors.
