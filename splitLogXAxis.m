@@ -15,7 +15,8 @@ function [axLeft, axRight] = splitLogXAxis(ax, xLim, yLim, xTicks, yTicks, wLeft
 % Outputs: [axLeft, axRight]
 %
 % Example: 
-%    splitLogXAxis(ax, [0.1,5], [-1,2], [0,0.2,0.5,1:1:5], [-1:1:2], 2, 0.5, 'Dark')
+%    [axLeft, axRight] = splitLogXAxis(ax, [0.1,5], [-1,2],...
+%           [0,0.2,0.5,1:1:5], [-1:1:2], 2, 0.5, 'Dark')
 %
 % See also: -
 
@@ -35,12 +36,12 @@ function [axLeft, axRight] = splitLogXAxis(ax, xLim, yLim, xTicks, yTicks, wLeft
 % Plot the current axes as the left axis
 % Set a slash symbol to the end of the left side axis
   set(axLeft, 'Position', get(axLeft, 'Position').*[1, 1, 0, 1] + [0, 0, wLeft, 0])
-  set(axLeft, 'XLim', [-1, 1], 'XTick', 0, 'XTickLabels', leftLabel,...
-      'yLim', yLim, 'YTick', yTicks)
+  set(axLeft, 'XLim', [-xLim(1),xLim(1)], 'XTick', 0, 'XTickLabels', leftLabel,...
+      'YLim', yLim, 'YTick', yTicks)
   set(axLeft, 'XGrid', 'off','XMinorGrid', 'off', 'YGrid', 'off',...
       'YMinorGrid', 'off')
   set(gcf, 'CurrentAxes', axLeft)
-  text(1, yLim(1), '/', 'VerticalAlignment', 'middle',...
+  text(xLim(1), yLim(1), '/', 'VerticalAlignment', 'middle',...
       'HorizontalAlignment', 'center', 'Color', get(gca, 'XColor'))
   
 % MODIFY GRAPHICS PROPERTIES OF THE RIGHT SIDE AXIS
@@ -51,7 +52,7 @@ function [axLeft, axRight] = splitLogXAxis(ax, xLim, yLim, xTicks, yTicks, wLeft
 % Plot the current axes as the right axis
 % Set a slash symbol to the beginning of the right side axis
   set(axRight, 'Position', get(axRight, 'Position') + [wLeft+dx, 0, -wLeft-dx, 0])
-  set(axRight, 'XLim', xLim, 'XTick', xTicks, 'yLim', yLim, 'YTick', yTicks,...
+  set(axRight, 'XLim', xLim, 'XTick', xTicks, 'YLim', yLim, 'YTick', yTicks,...
       'yTickLabels', [])
   set(axRight, 'XScale', 'log')
   set(axRight, 'YColor', 'none', 'Color', 'none')
@@ -60,5 +61,5 @@ function [axLeft, axRight] = splitLogXAxis(ax, xLim, yLim, xTicks, yTicks, wLeft
   set(gcf, 'CurrentAxes', axRight)
   text(xLim(1), yLim(1), '/', 'VerticalAlignment', 'middle',...
       'HorizontalAlignment', 'center', 'Color', get(gca, 'XColor'))
-  
+ 
 end
