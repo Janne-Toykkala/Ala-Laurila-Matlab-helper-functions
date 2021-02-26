@@ -18,9 +18,10 @@ data = importdata('exampleData.csv');
 x = data(:,1);
 y = data(:,2);
 
-% Quick and dirty polynomial fit to the data
-c = polyfit(x,y,8);
-myFit = polyval(c,x)
+% Least squares fit using Naka-Rushton equation, and Hill equation
+fit = fitNakaRushton(x, y, []);
+hillFun = @(x) fit.offset + (fit.Rmax-fit.offset) * (x.^fit.n) ./ ...
+    ((x.^fit.n) + fit.c50.^fit.n);
 
 % Fetch parameters for the figure window
 figWidth    = getParameterValue('figWidth');
@@ -33,35 +34,40 @@ axHeight    = getParameterValue('figAxHeight');
 % Set up the figure window
 %[fh, ax] = getFigureWindow(1, 1, [figWidth, figHeight, axX0, axY0, axWidth,... 
 %    axHeight, 0, 0], false);
-[fh, ax] = getFigureWindow(1, 1, [21, 15, 1, 1, 19, 13, 0, 0,],true)
-set(fh, 'CurrentAxes', ax)
+[fh, ax] = getFigureWindow(1, 1, [21, 15, 1, 1, 19, 13, 0, 0,],true);
+set(fh, 'CurrentAxes', ax);
 
 % Split the x-axis
 [axLeft, axRight] = splitLogXAxis(ax, [0.0012,100], [0,1], [0.01,0.1,1,10,100], [0:0.2:1], 3,...
-    0.1, 'Dark')
+    0.1, 'Dark');
 
 % Plot on the left axis
 phs = [];
 phs(end+1) = plot(data(:,1), data(:,2), 'o', 'Display', 'Data');
-phs(end+1) = plot(x, myFit, 'k-', 'Display','Fit');
-xlabel('Light intensity (R*/rod/s)')
-ylabel('Fraction of correct choices')
-labelPanel('1a)')
+phs(end+1) = plot(x, hillFun(x), 'k-', 'Display','Fit');
+xlabel('Light intensity (R*/rod/s)');
+ylabel('Fraction of correct choices');
+labelPanel('1a)');
 
 % Plot on the right axis
-set(gcf, 'CurrentAxes', axLeft)
+set(gcf, 'CurrentAxes', axLeft);
 phs(end+1) = plot(data(:,1), data(:,2), 'o', 'Display', 'Data');
-phs(end+1) = plot(x, myFit, 'k-', 'Display','Fit');
+phs(end+1) = plot(x, hillFun(x), 'k-', 'Display','Fit');
+
 
 % save figure
 % fix legend icons
+% new x-axis on top
+% 
 
+% Plot icons of the spatial stimulus
+insets = [2.5 4.1 7.1 10.3 13.5 16.7 20]
 for n = 1
     for m = 0
-        while n <= numel(data(:,1))
-            plotSpatialStimulusInset(1.3*n, 2.1, 'k', m*[1, 1, 1], 0.5)
+        while n <= numel(insets);
+            plotSpatialStimulusInset(insets(n), 2.1, 'k', m*[1, 1, 1], 0.5);
             n = n+1;
-            m = m + 1/numel(data(:,1));
+            m = m + 1/numel(insets);
         end
     end
 end
