@@ -18,7 +18,7 @@ data = importdata('exampleData.csv');
 x = data(:,1);
 y = data(:,2);
 
-% Least squares fit using Naka-Rushton equation, and Hill equation
+% Least squares fit using Naka-Rushton equation and Hill equation
 fit = fitNakaRushton(x, y, []);
 hillFun = @(x) fit.offset + (fit.Rmax-fit.offset) * (x.^fit.n) ./ ...
     ((x.^fit.n) + fit.c50.^fit.n);
@@ -38,10 +38,11 @@ axHeight    = getParameterValue('figAxHeight');
 set(fh, 'CurrentAxes', ax);
 
 % Split the x-axis
-[axLeft, axRight] = splitLogXAxis(ax, [0.0012,100], [0,1], [0.01,0.1,1,10,100], [0:0.2:1], 3,...
-    0.1, 'Dark');
+[axLeft, axRight] = splitLogXAxis(ax, [0.0012,100], [0,1], ...
+    [0.01,0.1,1,10,100], [0:0.2:1], 3, 0.1, 'Dark');
 
-% Plot on the left axis
+% Plot on the right axis
+set(gcf, 'CurrentAxes', axRight);
 phs = [];
 phs(end+1) = plot(data(:,1), data(:,2), 'o', 'Display', 'Data');
 phs(end+1) = plot(x, hillFun(x), 'k-', 'Display','Fit');
@@ -49,16 +50,20 @@ xlabel('Light intensity (R*/rod/s)');
 ylabel('Fraction of correct choices');
 labelPanel('1a)');
 
-% Plot on the right axis
+% Plot on the left axis
 set(gcf, 'CurrentAxes', axLeft);
-phs(end+1) = plot(data(:,1), data(:,2), 'o', 'Display', 'Data');
-phs(end+1) = plot(x, hillFun(x), 'k-', 'Display','Fit');
+plot(data(:,1), data(:,2), 'o', 'Display', 'Data');
+plot(x, hillFun(x), 'k-', 'Display','Fit');
 
+% Set the legend on the left axis
+[lh, icons] = legend(phs);
+fixLegendIcons(icons, -0.2, false)
+fixLegendPos(lh)
 
 % save figure
 % fix legend icons
 % new x-axis on top
-% 
+% Combine fix legend icons with fix legend pos?
 
 % Plot icons of the spatial stimulus
 insets = [2.5 4.1 7.1 10.3 13.5 16.7 20]
